@@ -1,0 +1,23 @@
+{
+  "metadata_rows": 4242,
+  "candidate_files_from_public_metadata": 18,
+  "full_text_available": 12,
+  "full_text_missing": 6,
+  "voluntary_or_donation_and_brain_death": 2,
+  "without_voluntary_or_donation": 9,
+  "without_voluntary_or_donation_and_without_donor": 2,
+  "target_without_voluntary_or_donation_but_with_donor": 7,
+  "target_keyword_counts": {
+    "voluntary_or_donation": 0,
+    "brain_death": 3,
+    "donor": 7,
+    "prisoner_or_execution": 0,
+    "death_determination": 0,
+    "circulatory_death": 0,
+    "airway_or_ventilation": 4,
+    "consent_or_family": 1,
+    "allocation_or_system": 0,
+    "retrieval": 4
+  },
+  "target_files_with_prisoner_or_execution_terms": []
+}
