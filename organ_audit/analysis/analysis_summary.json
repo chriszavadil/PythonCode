@@ -1,0 +1,31 @@
+{
+  "rows": 496,
+  "unique_files": 64,
+  "unique_titles": 64,
+  "years": {
+    "2016": 22,
+    "2017": 16,
+    "2018": 12,
+    "2019": 8,
+    "2020": 6
+  },
+  "rows_with_reviewer_notes": 3,
+  "files_with_reviewer_notes": 3,
+  "targeted_passages": 209,
+  "targeted_files": 41,
+  "keyword_passage_counts": {
+    "execution_or_custody": 0,
+    "brain_death": 198,
+    "death_determination": 27,
+    "cardiorespiratory_arrest": 37,
+    "airway_or_ventilation": 479,
+    "consent_or_family": 31,
+    "donation_system": 112,
+    "donor_language": 473
+  },
+  "note_values": {
+    "potentially problematic, but nothing hard on this. \"1.2.1 供心切取方法 供者取平卧位，全身肝素化 后，常规消毒铺巾，胸骨正中切开，锯开胸骨，切开 心 包 \" is suggestive, but it doesn't refer to intubation, so it can't said to be incriminating. ": 1,
+    "also a bit suspicious, but nothing on intubation of donor -- 供心摘取手术配合 供者取仰卧位，常规消 毒铺单，胸骨锯正中开胸，打开心包。肝素化后，递 4 - 0 血管缝线于升主动脉缝荷包并插灌注管": 1,
+    "has all the hallmarks except no reference to intubation": 1
+  }
+}
