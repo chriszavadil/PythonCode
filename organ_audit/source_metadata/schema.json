@@ -1,0 +1,53 @@
+{
+  "source": "https://raw.githubusercontent.com/mpr1255/dead_donor_replication/master/data/full_reference_data_nocode.csv",
+  "bytes": 3784957,
+  "encoding": "utf-8",
+  "rows": 4242,
+  "columns": [
+    "file_name",
+    "title_ch",
+    "author_ch",
+    "journal",
+    "year",
+    "issue",
+    "abstract_ch"
+  ],
+  "nonempty_counts": {
+    "file_name": 4242,
+    "title_ch": 4242,
+    "author_ch": 4158,
+    "journal": 4242,
+    "year": 4201,
+    "issue": 4201,
+    "abstract_ch": 4171
+  },
+  "example_rows": [
+    {
+      "file_name": "0001.txt",
+      "title_ch": "体外膜肺氧合技术在心死亡供体肝脏维护中的应用探索 - 中国学术期刊网络出版总库",
+      "author_ch": "欧晏娇; 邓永; 刘炜; 张世新; 张雷达",
+      "journal": "第三军医大学学报; Journal of Third Military Medical University",
+      "year": "",
+      "issue": "",
+      "abstract_ch": "目的 探索体外膜肺氧合技术在心死亡供体肝脏维护中的应用。方法 对我院36例心脏死亡的供体肝脏器官采用不同的方式进行保护，分为使用ECMO保护心脏死亡器官捐献DCD供体肝脏组(ECMO组)与未使用ECMO保护DCD供体肝脏组(无ECMO组)。供体肝脏器官在进行分类保护之前，均评估及维护供体内环境，积极纠治疗。肝功能异常时予以护肝治疗。在供体维持治疗过程中，ECMO组采用ECMO技术维护供体。无ECMO组及时撤除生命支持，待心停跳5分钟后获取供体。观察移植前供体肝脏病理、原发性移植肝无功能发生率、缺血性胆道病发生率、急性排斥反应发生率、移植后肝功能等。结果 移植前供体肝，ECMO组与无ECMO组在肝细胞坏死方面差异有统计学意义(P=0.026)，在肝细胞脂肪变性及肝细胞变性上差异均无统计学意义。ECMO组与无ECMO组在原发性移植肝无功能发生率、缺血性胆道病变发生率上差异均有统计学意义(P=0.045，0.026)。移植肝后ALT、AST、TBIL、Alb与PT指标，ECMO组与无ECMO组的肝功能各指标均随着时间的推移慢慢降低，且ECMO组各指标值均低于无ECMO组，差异均有统计学意义。结论 体外肺氧合技术在心死亡供体肝脏维护中有良好效果。"
+    },
+    {
+      "file_name": "0002.txt",
+      "title_ch": "同种原位心脏移植供心的保护",
+      "author_ch": "孙国成; 蔡振杰; 刘维永; 万明明; 杨光",
+      "journal": "第四军医大学学报; JOURNAL OF THE FOURTH MILITARY MEDICAL UNIVERSITY",
+      "year": "2000",
+      "issue": "5",
+      "abstract_ch": ""
+    },
+    {
+      "file_name": "0003.txt",
+      "title_ch": "同种原位心脏移植外科围术期处理",
+      "author_ch": "孙国成; 蔡振杰; 刘维永; 汪钢; 李彤; 王伟宪",
+      "journal": "第四军医大学学报; JOURNAL OF THE FOURTH MILITARY MEDICAL UNIVERSITY",
+      "year": "2000",
+      "issue": "5",
+      "abstract_ch": "目的　探讨采用同种原位心脏移植治疗终末期心脏病的外科围术期处理 .方法　 1例 2 9岁男性终末期心脏病患者接受同种原位心脏移植 ，供心保护采用冷晶体心脏停搏液顺行灌注 .术后采用新的三联免疫抑制治疗 .结果　患者存活至今 ，心理状态稳定 ，无明显排异迹象 ，血流动力学稳定 ，心功能  级 ，生活质量良好 .结论　心脏移植是治疗终末期心脏病唯一可行的方法 ，围术期处理是心脏移植成败的重要环节"
+    }
+  ]
+}
