@@ -1,0 +1,39 @@
+name: Audit IORG0003571 reporting
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/audit_iorg_identifier.py"
+      - ".github/workflows/audit_iorg_identifier.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Query Europe PMC and audit contexts
+        run: python organ_audit/audit_iorg_identifier.py
+
+      - name: Commit reproducible outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/iorg_audit
+          if git diff --cached --quiet; then
+            echo "No output changes"
+          else
+            git commit -m "Audit IORG0003571 publication reporting"
+            git push
+          fi
