@@ -1,0 +1,32 @@
+{
+  "query": "\"IORG0003571\"",
+  "europe_pmc_hit_count": 364,
+  "results_returned": 364,
+  "full_text_recovered": 346,
+  "uses_as_approval_or_protocol": 346,
+  "transplant_related_context": 19,
+  "date_attached_to_identifier": 25,
+  "retracted_records": 0,
+  "years": {
+    "2026": 6,
+    "2025": 20,
+    "2024": 30,
+    "2023": 30,
+    "2022": 65,
+    "2021": 51,
+    "2020": 56,
+    "2019": 38,
+    "2018": 19,
+    "2016": 15,
+    "2017": 17,
+    "2015": 9,
+    "2014": 5,
+    "2013": 2,
+    "2011": 1
+  },
+  "limitations": [
+    "Europe PMC coverage is incomplete; this is a lower-bound audit, not a census of every publication using the identifier.",
+    "Automated context classification identifies reporting patterns, not whether a separate study-specific approval document actually existed.",
+    "An IORG is an institutional/organizational IRB-registration identifier; its appearance does not itself prove that research lacked ethical review."
+  ]
+}
