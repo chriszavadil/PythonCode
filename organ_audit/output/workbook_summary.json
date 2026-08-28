@@ -1,0 +1,22 @@
+{
+  "source_url": "https://raw.githubusercontent.com/mpr1255/dead_donor_replication/master/data/post_2015_examination.xlsx",
+  "sha256": "cdd6f8cd70d50fc0ecda02d0421fa6ae9f0f8454354d966b2a2851aa8fd698d4",
+  "workbook_bytes": 76517,
+  "sheets": [
+    {
+      "name": "Sheet1",
+      "rows": 496,
+      "columns": [
+        "file_name",
+        "title_ch",
+        "journal_year",
+        "target_string",
+        "matching_string",
+        "string_distance",
+        "context",
+        "notes"
+      ],
+      "csv": "01_Sheet1.csv"
+    }
+  ]
+}
