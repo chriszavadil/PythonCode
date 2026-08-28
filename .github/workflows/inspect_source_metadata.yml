@@ -1,0 +1,42 @@
+name: Inspect public transplant source metadata
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/inspect_source_metadata.py"
+      - ".github/workflows/inspect_source_metadata.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install metadata dependency
+        run: python -m pip install --disable-pip-version-check pandas
+
+      - name: Inspect source metadata
+        run: python organ_audit/inspect_source_metadata.py
+
+      - name: Commit metadata schema only
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/source_metadata/schema.json
+          if git diff --cached --quiet; then
+            echo "No metadata changes"
+          else
+            git commit -m "Inspect public transplant source metadata"
+            git push
+          fi
