@@ -1,0 +1,42 @@
+name: Recover post-2015 transplant workbook
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/recover_workbook.py"
+      - ".github/workflows/recover_post_2015_workbook.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install workbook dependencies
+        run: python -m pip install --disable-pip-version-check pandas openpyxl
+
+      - name: Download and extract public workbook
+        run: python organ_audit/recover_workbook.py
+
+      - name: Commit reproducible outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/output
+          if git diff --cached --quiet; then
+            echo "No output changes"
+          else
+            git commit -m "Extract public post-2015 transplant workbook"
+            git push
+          fi
