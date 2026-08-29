@@ -1,0 +1,47 @@
+name: Extract focused Taiwan judgment passages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/taiwan_court_corpus/extract_focus_passages.py"
+      - ".github/workflows/extract_focused_taiwan_judgment_passages.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: focused-taiwan-judgment-passages
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Extract focused primary-source passages
+        run: python organ_audit/taiwan_court_corpus/extract_focus_passages.py
+
+      - name: Commit focused outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/taiwan_court_corpus/focused
+          if git diff --cached --quiet; then
+            echo "No output changes"
+          else
+            git commit -m "Add focused donor-source passages from Taiwan judgments"
+            git push
+          fi
