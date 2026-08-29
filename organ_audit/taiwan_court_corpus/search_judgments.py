@@ -2,9 +2,12 @@ from __future__ import annotations
 
 """Search Taiwan's public judgment system for post-2015 transplant-brokerage cases.
 
-The goal is to discover additional case-level records with independently useful
-anchors (court number, operation date, hospital, payment, travel or follow-up
-records). A match is a research lead, never proof of prisoner sourcing.
+Version 2 deliberately scores *local narrative windows* around transplant terms.
+The earlier whole-document scoring could falsely combine, for example, a medical
+history reference to transplantation with an unrelated fraud allegation, or
+mistake "中國信託" (CTBC Bank) for a China geographic reference.
+
+A candidate remains a research lead, never evidence of prisoner sourcing.
 
 HTML parsing patterns are adapted from the MIT-licensed public project
 asgard-ai-platform/mcp-tw-judgment:
@@ -21,7 +24,7 @@ from dataclasses import asdict, dataclass
 from datetime import date
 from pathlib import Path
 from typing import Iterable
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 import requests
 from bs4 import BeautifulSoup
@@ -33,8 +36,6 @@ DETAIL_URL = f"{BASE_URL}/FJUD/data.aspx"
 OUT = Path("organ_audit/taiwan_court_corpus/output")
 OUT.mkdir(parents=True, exist_ok=True)
 
-# Narrow, overlapping queries are intentional. They make the search reproducible
-# while limiting site load and false positives from generic medical disputes.
 SEARCH_QUERIES = [
     "器官移植 仲介 中國",
     "器官移植 仲介 大陸",
@@ -45,6 +46,11 @@ SEARCH_QUERIES = [
     "腎臟移植 仲介 中國",
     "肝臟移植 仲介 中國",
     "器官買賣 中國 移植",
+    "人體器官移植條例 仲介",
+    "人體器官移植條例 中國",
+    "抗排斥藥物 境外移植",
+    "赴中國 移植手術 仲介",
+    "洗腎 仲介 大陸 移植",
     "青島大學附屬醫院 移植",
     "湘雅三醫院 移植",
     "天津第一中心醫院 移植",
@@ -52,36 +58,40 @@ SEARCH_QUERIES = [
     "廣州醫科大學附屬第二醫院 移植",
 ]
 
-# Known public case used only as a parser and scoring control.
+# Known public case used only as a parser and strict-scoring control.
 BASELINE_IDS = ["CHDM,113,金訴,657,20250724,1"]
 
 MAX_PAGES_PER_QUERY = 25
-MAX_UNIQUE_DETAILS = 600
+MAX_UNIQUE_DETAILS = 700
 REQUEST_DELAY_SECONDS = 0.35
+WINDOW_BEFORE = 900
+WINDOW_AFTER = 1700
 
-ORGAN_TERMS = {
+ORGAN_ANCHOR_TERMS = {
     "器官移植", "肝臟移植", "肝移植", "腎臟移植", "腎移植", "心臟移植",
-    "肺臟移植", "胰臟移植", "移植手術", "器官來源",
+    "肺臟移植", "胰臟移植", "移植手術", "境外移植", "器官買賣",
 }
 CROSS_BORDER_TERMS = {
-    "中國", "大陸", "境外", "赴陸", "青島", "長沙", "廣州", "天津", "武漢",
-    "上海", "北京", "湘雅", "中山大學", "青島大學", "第一中心醫院",
+    "中國", "中國大陸", "大陸地區", "大陸", "境外", "赴陸", "赴中國",
+    "青島", "長沙", "廣州", "天津", "武漢", "上海", "北京", "湘雅",
+    "中山大學", "青島大學", "第一中心醫院",
 }
 BROKERAGE_TERMS = {
     "仲介", "居間", "介紹費", "仲介費", "報酬", "佣金", "對價", "招攬",
-    "媒介", "器官買賣", "器官來源費", "代辦",
+    "媒介", "器官買賣", "器官來源費", "代辦", "轉介病患", "介紹病患",
 }
 PAYMENT_TERMS = {
     "匯款", "轉帳", "交易明細", "帳戶", "地下匯兌", "現金", "人民幣",
-    "新臺幣", "費用", "支付", "收款", "價金",
+    "新臺幣", "費用", "支付", "收款", "價金", "手術費", "醫療費",
 }
 TRAVEL_MEDICAL_TERMS = {
-    "抗排斥藥", "免疫抑制", "入出境", "出入境", "搭機", "航班", "病歷",
-    "就醫紀錄", "處方", "健保", "移植時間", "手術日期",
+    "抗排斥藥", "抗排斥藥物", "免疫抑制", "入出境", "出入境", "搭機",
+    "航班", "病歷", "就醫紀錄", "處方", "健保", "移植時間", "手術日期",
+    "返臺", "赴陸", "赴中國",
 }
 PROVENANCE_CUSTODY_TERMS = {
     "死刑犯", "受刑人", "囚犯", "監獄", "拘留", "羈押", "法輪功", "維吾爾",
-    "捐贈者", "供體", "器官捐贈", "COTRS", "器官分配",
+    "捐贈者", "供體", "器官捐贈", "COTRS", "器官分配", "器官來源",
 }
 EVIDENCE_TERMS = {
     "對話紀錄", "微信", "LINE", "通訊軟體", "證人", "供述", "扣案", "搜索",
@@ -94,7 +104,7 @@ HOSPITAL_TERMS = {
 }
 
 ALL_TERM_GROUPS = {
-    "organ": ORGAN_TERMS,
+    "organ": ORGAN_ANCHOR_TERMS,
     "cross_border": CROSS_BORDER_TERMS,
     "brokerage": BROKERAGE_TERMS,
     "payment": PAYMENT_TERMS,
@@ -102,6 +112,13 @@ ALL_TERM_GROUPS = {
     "provenance_custody": PROVENANCE_CUSTODY_TERMS,
     "evidence": EVIDENCE_TERMS,
     "hospital": HOSPITAL_TERMS,
+}
+
+# Taiwan entities that contain the literal characters 中國 but do not provide a
+# geographic China anchor. Matching them as "China" caused obvious false leads.
+NON_GEOGRAPHIC_CHINA_PREFIXES = {
+    "中國信託", "中國人壽", "中國鋼鐵", "中國醫藥大學", "中國文化大學",
+    "中國時報", "中國輸出入銀行", "中國石油", "中國國際商銀",
 }
 
 
@@ -117,15 +134,27 @@ class SearchResult:
 
 
 @dataclass
+class WindowAssessment:
+    start: int
+    end: int
+    score: int
+    groups: dict[str, list[str]]
+    qualifying: bool
+    reason: str
+    text: str
+
+
+@dataclass
 class Candidate:
     judgment_id: str
     title: str
     roc_date: str
     case_reason: str
     public_url: str
-    score: int
-    matched_groups: str
-    matched_terms: str
+    strict_score: int
+    local_group_count: int
+    matched_groups_local: str
+    matched_terms_local: str
     source_queries: str
     excerpt_redacted: str
     content_sha256: str
@@ -136,7 +165,7 @@ class JudgmentClient:
         self.session = requests.Session()
         self.session.headers.update(
             {
-                "User-Agent": "Mozilla/5.0 (compatible; public-interest-court-audit/1.0; +https://github.com/chriszavadil/PythonCode)",
+                "User-Agent": "Mozilla/5.0 (compatible; public-interest-court-audit/2.0; +https://github.com/chriszavadil/PythonCode)",
                 "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
                 "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.5",
             }
@@ -207,8 +236,7 @@ def parse_result_list(html: str, query: str) -> list[SearchResult]:
             continue
         link = cells[1].find("a", href=True)
         href = link.get("href", "") if link else ""
-        parsed = parse_qs(urlparse(href).query)
-        judgment_id = parsed.get("id", [""])[0]
+        judgment_id = parse_qs(urlparse(href).query).get("id", [""])[0]
         if not judgment_id:
             continue
         title = re.sub(r"\s*（\d+K）", "", cells[1].get_text(" ", strip=True))
@@ -247,59 +275,131 @@ def post_2015(judgment_id: str, roc_date: str) -> bool:
     return bool(match and int(match.group(1)) >= 104)
 
 
-def matched_terms(content: str) -> dict[str, list[str]]:
-    return {
-        group: sorted(term for term in terms if term in content)
-        for group, terms in ALL_TERM_GROUPS.items()
-    }
+def valid_cross_border_occurrence(text: str, term: str, position: int) -> bool:
+    if term != "中國":
+        return True
+    suffix = text[position : position + 12]
+    return not any(suffix.startswith(prefix) for prefix in NON_GEOGRAPHIC_CHINA_PREFIXES)
 
 
-def score_candidate(groups: dict[str, list[str]]) -> int:
+def terms_in_text(text: str) -> dict[str, list[str]]:
+    groups: dict[str, list[str]] = {}
+    for group, terms in ALL_TERM_GROUPS.items():
+        found: list[str] = []
+        for term in sorted(terms, key=len, reverse=True):
+            positions = [match.start() for match in re.finditer(re.escape(term), text)]
+            if group == "cross_border":
+                positions = [pos for pos in positions if valid_cross_border_occurrence(text, term, pos)]
+            if positions:
+                found.append(term)
+        groups[group] = sorted(set(found))
+    return groups
+
+
+def local_score(groups: dict[str, list[str]]) -> int:
     score = 0
     if groups["organ"]:
-        score += 3
+        score += 4
     if groups["cross_border"]:
-        score += 2
-    if groups["brokerage"]:
         score += 3
+    if groups["hospital"]:
+        score += 4
+    if groups["brokerage"]:
+        score += 4
     if groups["payment"]:
         score += 2
     if groups["travel_medical"]:
-        score += 2
-    if groups["evidence"]:
-        score += 2
-    if groups["hospital"]:
-        score += 2
-    if groups["provenance_custody"]:
-        score += 1  # lead only; never treated as proof
-    if groups["organ"] and groups["cross_border"] and groups["brokerage"]:
         score += 3
-    if groups["payment"] and groups["travel_medical"]:
-        score += 2
+    if groups["evidence"]:
+        score += 1
+    if groups["provenance_custody"]:
+        score += 1
+    if groups["organ"] and groups["cross_border"] and groups["brokerage"]:
+        score += 5
+    if groups["organ"] and groups["payment"] and groups["travel_medical"]:
+        score += 3
+    if groups["organ"] and groups["hospital"]:
+        score += 3
     return score
 
 
-def qualifying(groups: dict[str, list[str]], score: int) -> bool:
-    # Require organ context plus a cross-border or named-hospital anchor and at
-    # least one independently useful operational/evidentiary category.
-    anchor = bool(groups["cross_border"] or groups["hospital"])
-    operational = bool(
+def strict_qualification(groups: dict[str, list[str]], score: int) -> tuple[bool, str]:
+    if not groups["organ"]:
+        return False, "no transplant anchor in local window"
+    if not (groups["cross_border"] or groups["hospital"]):
+        return False, "no China/cross-border or named-hospital anchor in local window"
+
+    operational_path = bool(
         groups["brokerage"]
-        or groups["payment"]
-        or groups["travel_medical"]
-        or groups["evidence"]
+        or (groups["payment"] and groups["travel_medical"])
+        or (groups["hospital"] and groups["payment"] and groups["evidence"])
     )
-    return bool(groups["organ"] and anchor and operational and score >= 7)
+    if not operational_path:
+        return False, "no local brokerage or payment-plus-travel/medical path"
+    if score < 12:
+        return False, "local score below strict threshold"
+    return True, "strict local co-occurrence satisfied"
 
 
-def redact_excerpt(text: str, terms: Iterable[str], width: int = 440) -> str:
-    compact = re.sub(r"\s+", " ", text).strip()
-    positions = [compact.find(term) for term in terms if compact.find(term) >= 0]
-    center = min(positions) if positions else 0
-    start = max(0, center - width // 3)
-    excerpt = compact[start : start + width]
+def assessment_windows(content: str) -> list[WindowAssessment]:
+    compact = re.sub(r"\s+", " ", content).strip()
+    anchor_positions: list[int] = []
+    for term in ORGAN_ANCHOR_TERMS:
+        anchor_positions.extend(match.start() for match in re.finditer(re.escape(term), compact))
 
-    # Conservative masking of common role-labelled names and direct identifiers.
+    assessments: list[WindowAssessment] = []
+    seen_ranges: set[tuple[int, int]] = set()
+    for position in sorted(set(anchor_positions)):
+        start = max(0, position - WINDOW_BEFORE)
+        end = min(len(compact), position + WINDOW_AFTER)
+        # Merge near-identical overlapping anchor windows deterministically.
+        rounded = (start // 250 * 250, min(len(compact), ((end + 249) // 250) * 250))
+        if rounded in seen_ranges:
+            continue
+        seen_ranges.add(rounded)
+        text = compact[start:end]
+        groups = terms_in_text(text)
+        score = local_score(groups)
+        qualifies, reason = strict_qualification(groups, score)
+        assessments.append(
+            WindowAssessment(
+                start=start,
+                end=end,
+                score=score,
+                groups=groups,
+                qualifying=qualifies,
+                reason=reason,
+                text=text,
+            )
+        )
+    return assessments
+
+
+def best_window(content: str) -> WindowAssessment:
+    windows = assessment_windows(content)
+    if not windows:
+        return WindowAssessment(
+            start=0,
+            end=min(len(content), 1200),
+            score=0,
+            groups={group: [] for group in ALL_TERM_GROUPS},
+            qualifying=False,
+            reason="no transplant anchor in judgment",
+            text=re.sub(r"\s+", " ", content)[:1200],
+        )
+    return sorted(
+        windows,
+        key=lambda item: (
+            not item.qualifying,
+            -item.score,
+            -sum(bool(values) for values in item.groups.values()),
+            item.start,
+        ),
+    )[0]
+
+
+def redact_excerpt(text: str, width: int = 650) -> str:
+    excerpt = re.sub(r"\s+", " ", text).strip()[:width]
     excerpt = re.sub(
         r"(病患|患者|被告|證人|告訴人|告發人|醫師|仲介人|家屬)([：:\s]*)([\u4e00-\u9fff○ＯA-Z]{2,5})",
         r"\1\2[REDACTED]",
@@ -311,8 +411,6 @@ def redact_excerpt(text: str, terms: Iterable[str], width: int = 440) -> str:
 
 
 def public_url(judgment_id: str) -> str:
-    from urllib.parse import quote
-
     return f"{DETAIL_URL}?ty=JD&id={quote(judgment_id, safe=',')}&ot=in"
 
 
@@ -321,6 +419,10 @@ def write_csv(path: Path, rows: list[dict[str, object]], fields: list[str]) -> N
         writer = csv.DictWriter(handle, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def flatten_terms(groups: dict[str, list[str]]) -> list[str]:
+    return sorted({term for values in groups.values() for term in values})
 
 
 def main() -> None:
@@ -345,7 +447,7 @@ def main() -> None:
                     continue
                 by_id.setdefault(record.judgment_id, record)
                 source_queries[record.judgment_id].add(query)
-        except Exception as exc:  # keep remaining queries reproducible
+        except Exception as exc:
             errors.append({"stage": "search", "identifier": query, "error": repr(exc)})
 
     for baseline_id in BASELINE_IDS:
@@ -363,45 +465,48 @@ def main() -> None:
         )
         source_queries[baseline_id].add("baseline control")
 
-    # Deterministic cap: prioritize records found by more independent queries.
-    ids = sorted(
-        by_id,
-        key=lambda item: (-len(source_queries[item]), item),
-    )[:MAX_UNIQUE_DETAILS]
+    ids = sorted(by_id, key=lambda item: (-len(source_queries[item]), item))[:MAX_UNIQUE_DETAILS]
 
     candidates: list[Candidate] = []
     detail_index: list[dict[str, object]] = []
-    group_counts: Counter[str] = Counter()
+    exclusions: list[dict[str, object]] = []
+    local_group_counts: Counter[str] = Counter()
 
     for judgment_id in ids:
         seed = by_id[judgment_id]
         try:
             detail, raw = client.detail(judgment_id)
             content = detail["content"]
-            groups = matched_terms(content)
-            score = score_candidate(groups)
-            for group, values in groups.items():
+            window = best_window(content)
+            global_groups = terms_in_text(content)
+            for group, values in window.groups.items():
                 if values:
-                    group_counts[group] += 1
+                    local_group_counts[group] += 1
 
-            flat_terms = sorted({term for values in groups.values() for term in values})
-            detail_index.append(
-                {
-                    "judgment_id": judgment_id,
-                    "title": detail["title"] or seed.title,
-                    "roc_date": detail["date"] or seed.roc_date,
-                    "case_reason": detail["case_reason"] or seed.case_reason,
-                    "score": score,
-                    "source_query_count": len(source_queries[judgment_id]),
-                    "source_queries": " | ".join(sorted(source_queries[judgment_id])),
-                    "matched_groups": " | ".join(group for group, values in groups.items() if values),
-                    "matched_terms": " | ".join(flat_terms),
-                    "content_sha256": hashlib.sha256(raw).hexdigest(),
-                    "public_url": public_url(judgment_id),
-                }
-            )
+            local_terms = flatten_terms(window.groups)
+            local_groups = [group for group, values in window.groups.items() if values]
+            base_row = {
+                "judgment_id": judgment_id,
+                "title": detail["title"] or seed.title,
+                "roc_date": detail["date"] or seed.roc_date,
+                "case_reason": detail["case_reason"] or seed.case_reason,
+                "strict_score": window.score,
+                "strict_qualifying": window.qualifying,
+                "qualification_reason": window.reason,
+                "local_group_count": len(local_groups),
+                "matched_groups_local": " | ".join(local_groups),
+                "matched_terms_local": " | ".join(local_terms),
+                "matched_groups_global": " | ".join(
+                    group for group, values in global_groups.items() if values
+                ),
+                "source_query_count": len(source_queries[judgment_id]),
+                "source_queries": " | ".join(sorted(source_queries[judgment_id])),
+                "content_sha256": hashlib.sha256(raw).hexdigest(),
+                "public_url": public_url(judgment_id),
+            }
+            detail_index.append(base_row)
 
-            if qualifying(groups, score):
+            if window.qualifying:
                 candidates.append(
                     Candidate(
                         judgment_id=judgment_id,
@@ -409,19 +514,44 @@ def main() -> None:
                         roc_date=detail["date"] or seed.roc_date,
                         case_reason=detail["case_reason"] or seed.case_reason,
                         public_url=public_url(judgment_id),
-                        score=score,
-                        matched_groups=" | ".join(group for group, values in groups.items() if values),
-                        matched_terms=" | ".join(flat_terms),
+                        strict_score=window.score,
+                        local_group_count=len(local_groups),
+                        matched_groups_local=" | ".join(local_groups),
+                        matched_terms_local=" | ".join(local_terms),
                         source_queries=" | ".join(sorted(source_queries[judgment_id])),
-                        excerpt_redacted=redact_excerpt(content, flat_terms),
+                        excerpt_redacted=redact_excerpt(window.text),
                         content_sha256=hashlib.sha256(raw).hexdigest(),
                     )
+                )
+            else:
+                exclusions.append(
+                    {
+                        **base_row,
+                        "excerpt_redacted": redact_excerpt(window.text, width=360),
+                    }
                 )
         except Exception as exc:
             errors.append({"stage": "detail", "identifier": judgment_id, "error": repr(exc)})
 
-    candidate_rows = [asdict(item) for item in sorted(candidates, key=lambda item: (-item.score, item.roc_date, item.judgment_id))]
-    detail_rows = sorted(detail_index, key=lambda item: (-int(item["score"]), str(item["judgment_id"])))
+    candidate_rows = [
+        asdict(item)
+        for item in sorted(
+            candidates,
+            key=lambda item: (-item.strict_score, item.roc_date, item.judgment_id),
+        )
+    ]
+    detail_rows = sorted(
+        detail_index,
+        key=lambda item: (
+            not bool(item["strict_qualifying"]),
+            -int(item["strict_score"]),
+            str(item["judgment_id"]),
+        ),
+    )
+    exclusion_rows = sorted(
+        exclusions,
+        key=lambda item: (-int(item["strict_score"]), str(item["judgment_id"])),
+    )
 
     write_csv(
         OUT / "query_statistics.csv",
@@ -432,9 +562,10 @@ def main() -> None:
         OUT / "detail_index.csv",
         detail_rows,
         [
-            "judgment_id", "title", "roc_date", "case_reason", "score",
-            "source_query_count", "source_queries", "matched_groups",
-            "matched_terms", "content_sha256", "public_url",
+            "judgment_id", "title", "roc_date", "case_reason", "strict_score",
+            "strict_qualifying", "qualification_reason", "local_group_count",
+            "matched_groups_local", "matched_terms_local", "matched_groups_global",
+            "source_query_count", "source_queries", "content_sha256", "public_url",
         ],
     )
     write_csv(
@@ -442,25 +573,41 @@ def main() -> None:
         candidate_rows,
         [
             "judgment_id", "title", "roc_date", "case_reason", "public_url",
-            "score", "matched_groups", "matched_terms", "source_queries",
-            "excerpt_redacted", "content_sha256",
+            "strict_score", "local_group_count", "matched_groups_local",
+            "matched_terms_local", "source_queries", "excerpt_redacted",
+            "content_sha256",
+        ],
+    )
+    write_csv(
+        OUT / "excluded_false_positives.csv",
+        exclusion_rows,
+        [
+            "judgment_id", "title", "roc_date", "case_reason", "strict_score",
+            "strict_qualifying", "qualification_reason", "local_group_count",
+            "matched_groups_local", "matched_terms_local", "matched_groups_global",
+            "source_query_count", "source_queries", "excerpt_redacted",
+            "content_sha256", "public_url",
         ],
     )
     write_csv(OUT / "errors.csv", errors, ["stage", "identifier", "error"])
 
+    baseline_qualified = BASELINE_IDS[0] in {row["judgment_id"] for row in candidate_rows}
     summary = {
         "generated_on": date.today().isoformat(),
+        "method_version": 2,
         "queries_attempted": len(SEARCH_QUERIES),
         "queries_succeeded": len(query_stats),
         "unique_post_2015_results_before_cap": len(by_id),
         "details_attempted": len(ids),
         "details_retrieved": len(detail_rows),
-        "qualifying_case_level_leads": len(candidate_rows),
+        "strict_case_level_leads": len(candidate_rows),
+        "excluded_after_local_cooccurrence_test": len(exclusion_rows),
         "errors": len(errors),
-        "matched_group_document_counts": dict(group_counts),
+        "local_matched_group_document_counts": dict(local_group_counts),
         "baseline_ids": BASELINE_IDS,
+        "baseline_qualified": baseline_qualified,
         "methodological_limit": (
-            "A candidate is a public-record lead, not evidence of prisoner sourcing. "
+            "A strict candidate is a public-record lead, not evidence of prisoner sourcing. "
             "A positive prisoner-sourcing finding requires an independently corroborated "
             "custody-to-testing-to-death/procurement-to-recipient chain."
         ),
@@ -474,37 +621,40 @@ def main() -> None:
         "",
         f"Generated: {summary['generated_on']}",
         "",
-        "## Scope",
+        "## Version 2 correction",
         "",
-        "The script searched Taiwan's public judgment system with overlapping, narrowly defined terms for cross-border transplant brokerage, payments, travel, anti-rejection medication, named Chinese hospitals, and donor-provenance language.",
+        "The first scan scored terms anywhere in a full judgment and therefore overmatched unrelated cases. Version 2 requires the transplant, cross-border/hospital, and operational evidence to occur in the same local narrative window. It also excludes non-geographic uses such as 中國信託 from the China anchor.",
         "",
         "## Results",
         "",
         f"- Queries succeeded: {summary['queries_succeeded']} / {summary['queries_attempted']}",
         f"- Unique post-2015 judgments queued: {summary['unique_post_2015_results_before_cap']}",
         f"- Full judgment texts retrieved: {summary['details_retrieved']}",
-        f"- Mechanically qualifying case-level leads: {summary['qualifying_case_level_leads']}",
+        f"- Strict local-co-occurrence leads: {summary['strict_case_level_leads']}",
+        f"- Excluded after local review: {summary['excluded_after_local_cooccurrence_test']}",
         f"- Retrieval or parsing errors: {summary['errors']}",
+        f"- Known brokerage control qualified: {summary['baseline_qualified']}",
         "",
         "## Evidence rule",
         "",
-        "A match establishes only that a public judgment contains useful operational anchors. It does not establish the identity or custody status of an organ donor. The candidates file deliberately uses short, role-redacted excerpts and omits party names and medical diagnoses.",
+        "A match establishes only that a public judgment contains a locally coherent transplant-brokerage or transplant-payment narrative. It does not establish donor identity or custody status. Short excerpts are role-redacted and party names or medical diagnoses are not intentionally exported.",
         "",
         "## Outputs",
         "",
-        "- `query_statistics.csv`: query-level result counts",
-        "- `detail_index.csv`: metadata and matched-term index for all fetched judgments",
-        "- `candidates.csv`: higher-scoring leads for manual authentication",
+        "- `candidates.csv`: strict local-co-occurrence leads",
+        "- `excluded_false_positives.csv`: transparent rejection log",
+        "- `detail_index.csv`: all fetched judgments and qualification reasons",
+        "- `query_statistics.csv`: query-level retrieval counts",
         "- `errors.csv`: reproducibility log",
         "- `summary.json`: machine-readable summary",
         "",
     ]
     (OUT / "REPORT.md").write_text("\n".join(report_lines), encoding="utf-8")
 
-    # The known public judgment must be retrievable; otherwise a green workflow
-    # would provide false confidence about the corpus connection.
     if BASELINE_IDS[0] not in {row["judgment_id"] for row in detail_rows}:
         raise RuntimeError("baseline judgment could not be retrieved")
+    if not baseline_qualified:
+        raise RuntimeError("strict scoring failed to retain the known brokerage control")
 
 
 if __name__ == "__main__":
