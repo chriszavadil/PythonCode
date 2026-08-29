@@ -1,24 +1,27 @@
 {
   "generated_on": "2026-08-29",
-  "queries_attempted": 14,
-  "queries_succeeded": 14,
-  "unique_post_2015_results_before_cap": 33,
-  "details_attempted": 33,
-  "details_retrieved": 33,
-  "qualifying_case_level_leads": 25,
+  "method_version": 2,
+  "queries_attempted": 19,
+  "queries_succeeded": 19,
+  "unique_post_2015_results_before_cap": 17,
+  "details_attempted": 17,
+  "details_retrieved": 17,
+  "strict_case_level_leads": 4,
+  "excluded_after_local_cooccurrence_test": 13,
   "errors": 0,
-  "matched_group_document_counts": {
-    "organ": 25,
-    "cross_border": 25,
-    "brokerage": 20,
-    "payment": 24,
-    "travel_medical": 9,
-    "provenance_custody": 6,
-    "evidence": 25,
+  "local_matched_group_document_counts": {
+    "organ": 11,
+    "cross_border": 5,
+    "brokerage": 9,
+    "payment": 7,
+    "travel_medical": 2,
+    "provenance_custody": 3,
+    "evidence": 8,
     "hospital": 1
   },
   "baseline_ids": [
     "CHDM,113,金訴,657,20250724,1"
   ],
-  "methodological_limit": "A candidate is a public-record lead, not evidence of prisoner sourcing. A positive prisoner-sourcing finding requires an independently corroborated custody-to-testing-to-death/procurement-to-recipient chain."
+  "baseline_qualified": true,
+  "methodological_limit": "A strict candidate is a public-record lead, not evidence of prisoner sourcing. A positive prisoner-sourcing finding requires an independently corroborated custody-to-testing-to-death/procurement-to-recipient chain."
 }
