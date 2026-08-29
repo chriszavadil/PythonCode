@@ -1,0 +1,131 @@
+{
+  "generated_on": "2026-08-29",
+  "cases": [
+    {
+      "category": "china_brokerage_trial",
+      "judgment_id": "CHDM,113,金訴,657,20250724,1",
+      "title": "臺灣彰化地方法院 113 年度金訴字第 657 號刑事判決",
+      "date": "民國 114 年 07 月 24 日",
+      "case_reason": "違反銀行法等",
+      "passages": 2,
+      "term_counts": {
+        "供體": 4,
+        "供體費": 2,
+        "購買費用": 2,
+        "戒護人員": 1,
+        "緩刑": 18,
+        "證據": 34,
+        "無證據": 1
+      },
+      "content_sha256": "b25ec2f7ecda514981a314dec072c1da6c5d2e7aebf3629568bf6cc5f26de25a",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=CHDM,113,%E9%87%91%E8%A8%B4,657,20250724,1&ot=in"
+    },
+    {
+      "category": "china_brokerage_sentencing_appeal",
+      "judgment_id": "TCHM,114,金上訴,1935,20260211,1",
+      "title": "臺灣高等法院 臺中分院 114 年度金上訴字第 1935 號刑事判決",
+      "date": "民國 115 年 02 月 11 日",
+      "case_reason": "違反銀行法等",
+      "passages": 1,
+      "term_counts": {
+        "活摘": 3,
+        "器官來源": 4,
+        "來源不明": 3,
+        "器官提供人": 2,
+        "器官捐贈": 7,
+        "捐贈者": 3,
+        "器官買賣": 4,
+        "伊斯坦堡宣言": 1,
+        "世界衛生組織": 1,
+        "緩刑": 81,
+        "證據": 3,
+        "無證據": 1,
+        "刑罰化": 5
+      },
+      "content_sha256": "11dc78fc413f1eb5241e5490486e4c1753fe21bca406556b60c594da506cfcfb",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TCHM,114,%E9%87%91%E4%B8%8A%E8%A8%B4,1935,20260211,1&ot=in"
+    },
+    {
+      "category": "scam_compound_trial_503",
+      "judgment_id": "TNDM,114,訴,503,20251127,4",
+      "title": "臺灣臺南地方法院 114 年度訴字第 503 號刑事判決",
+      "date": "民國 114 年 11 月 27 日",
+      "case_reason": "違反人口販運防制法等",
+      "passages": 1,
+      "term_counts": {
+        "來源不明": 1,
+        "證據": 30,
+        "無證據": 2,
+        "拆器官": 1,
+        "拆解費": 1,
+        "人口販運": 57,
+        "美索": 6,
+        "詐欺園區": 47
+      },
+      "content_sha256": "dcc2631f660fa7101feb51c010869ab1f53dc63ba150216d7f0f45b7889868d7",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TNDM,114,%E8%A8%B4,503,20251127,4&ot=in"
+    },
+    {
+      "category": "scam_compound_trial_1628",
+      "judgment_id": "TNDM,114,訴,1628,20251127,1",
+      "title": "臺灣臺南地方法院 114 年度訴字第 1628 號刑事判決",
+      "date": "民國 114 年 11 月 27 日",
+      "case_reason": "妨害自由等",
+      "passages": 1,
+      "term_counts": {
+        "來源不明": 1,
+        "證據": 30,
+        "無證據": 2,
+        "拆器官": 1,
+        "拆解費": 1,
+        "人口販運": 57,
+        "美索": 6,
+        "詐欺園區": 47
+      },
+      "content_sha256": "fdd82e98b5b5c39fe496fa773ab1a03e87ea28c8dc2d52b7bcbb236f5000bdd4",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TNDM,114,%E8%A8%B4,1628,20251127,1&ot=in"
+    },
+    {
+      "category": "scam_compound_appeal_68",
+      "judgment_id": "TNHM,115,上訴,68,20260528,2",
+      "title": "臺灣高等法院 臺南分院 115 年度上訴字第 68 號刑事判決",
+      "date": "民國 115 年 05 月 28 日",
+      "case_reason": "違反人口販運防制法等",
+      "passages": 1,
+      "term_counts": {
+        "來源不明": 1,
+        "證據": 35,
+        "無證據": 3,
+        "拆器官": 1,
+        "拆解費": 1,
+        "人口販運": 79,
+        "美索": 6,
+        "詐欺園區": 58
+      },
+      "content_sha256": "e7c7d90988406d46f64900e5e3025070f2984dd55868850af0bdbb1626040591",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TNHM,115,%E4%B8%8A%E8%A8%B4,68,20260528,2&ot=in"
+    },
+    {
+      "category": "scam_compound_appeal_69",
+      "judgment_id": "TNHM,115,上訴,69,20260528,1",
+      "title": "臺灣高等法院 臺南分院 115 年度上訴字第 69 號刑事判決",
+      "date": "民國 115 年 05 月 28 日",
+      "case_reason": "違反人口販運防制法等",
+      "passages": 1,
+      "term_counts": {
+        "來源不明": 1,
+        "證據": 35,
+        "無證據": 3,
+        "拆器官": 1,
+        "拆解費": 1,
+        "人口販運": 79,
+        "美索": 6,
+        "詐欺園區": 58
+      },
+      "content_sha256": "6a65fd8d7ef92c2d342e76cf814090e4f4882c1400017ce6dd01e8cf02a20799",
+      "public_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=TNHM,115,%E4%B8%8A%E8%A8%B4,69,20260528,1&ot=in"
+    }
+  ],
+  "errors": [],
+  "interpretation_limit": "The China brokerage judgments establish brokerage and payments, not donor custody status. The scam-compound judgments establish chats and trafficking conduct, not a completed transplant."
+}
