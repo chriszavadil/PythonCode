@@ -1,0 +1,18 @@
+{
+  "generated_on": "2026-08-29",
+  "input_judgments": 33,
+  "judgments_retrieved": 33,
+  "errors": 0,
+  "classifications": {
+    "strong_case_level_lead": 8,
+    "rejected_no_cross_border_anchor": 14,
+    "manual_review": 1,
+    "rejected_no_transaction_or_brokerage": 2,
+    "rejected_no_local_window": 8
+  },
+  "surviving_leads": 9,
+  "strong_case_level_leads": 8,
+  "manual_review": 1,
+  "baseline_control": "CHDM,113,金訴,657,20250724,1",
+  "evidence_limit": "Survival means only that a public judgment contains a locally coherent cross-border transplant event or arrangement. It does not identify the donor or establish prisoner sourcing."
+}
