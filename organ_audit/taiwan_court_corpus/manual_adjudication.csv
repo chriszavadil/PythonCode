@@ -1,0 +1,10 @@
+judgment_id,manual_classification,unique_event_key,china_transplant_system_relevance,novel_event,completed_procurement_established,prisoner_sourcing_established,rationale
+"CHDM,113,金訴,657,20250724,1",known_baseline,changhua_china_brokerage,high,false,false,false,"Direct paid cross-border transplant brokerage with named Chinese hospitals and recipient operations; donor provenance remains unknown."
+"TCHM,114,金上訴,1935,20260211,1",duplicate_appellate_record,changhua_china_brokerage,high,false,false,false,"Sentencing/partial appeal arising from the same Changhua prosecution; not a new network or event set."
+"ULDV,112,消債清,2,20230531,2",false_positive,none,none,false,false,false,"China Medical University Hospital is a Taiwanese institution and brokerage refers to real estate; transplant history is incidental."
+"TNDM,114,訴,1628,20251127,1",separate_non_china_trafficking_lead,thai_myanmar_scam_compound_organ_threat,none,true,false,false,"Communications discuss possible organ removal and pricing in a Southeast Asia scam-compound trafficking context; no completed procurement or Chinese transplant hospital is established."
+"TNDM,114,訴,503,20251127,4",duplicate_parallel_record,thai_myanmar_scam_compound_organ_threat,none,false,false,false,"Parallel first-instance record using the same organ-removal communications."
+"TNHM,115,上訴,68,20260528,2",duplicate_appellate_record,thai_myanmar_scam_compound_organ_threat,none,false,false,false,"Appellate record of the same scam-compound trafficking evidence."
+"TNHM,115,上訴,69,20260528,1",duplicate_appellate_record,thai_myanmar_scam_compound_organ_threat,none,false,false,false,"Appellate record of the same scam-compound trafficking evidence."
+"TPDM,109,聲判,275,20230829,1",secondary_allegation,public_controversy_defamation,low,false,false,false,"Repeats disputed public allegations in a prosecution-review/defamation context; does not independently establish a transplant transaction."
+"TPHM,111,重上更一,35,20260430,7",incidental_medical_history,unrelated_corruption_case,none,false,false,false,"A past mainland kidney transplant appears only as a timeline detail in an unrelated corruption case."
