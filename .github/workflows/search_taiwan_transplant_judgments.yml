@@ -6,6 +6,7 @@ on:
     branches: [master]
     paths:
       - "organ_audit/taiwan_court_corpus/search_judgments.py"
+      - "organ_audit/taiwan_court_corpus/refine_by_proximity.py"
       - ".github/workflows/search_taiwan_transplant_judgments.yml"
 
 permissions:
@@ -34,6 +35,9 @@ jobs:
       - name: Search and score public judgments
         run: python organ_audit/taiwan_court_corpus/search_judgments.py
 
+      - name: Refine candidates by local co-occurrence
+        run: python organ_audit/taiwan_court_corpus/refine_by_proximity.py
+
       - name: Commit reproducible outputs
         run: |
           git config user.name "github-actions[bot]"
@@ -42,6 +46,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No output changes"
           else
-            git commit -m "Add Taiwan transplant-brokerage judgment scan results"
+            git commit -m "Add proximity-refined Taiwan judgment leads"
             git push
           fi
