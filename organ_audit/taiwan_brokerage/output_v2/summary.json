@@ -1,0 +1,29 @@
+{
+  "generated_on": "2026-08-29",
+  "case_number": "Taiwan Changhua District Court 113年度金訴字第657號",
+  "source_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=CHDM,113,%E9%87%91%E8%A8%B4,657,20250724,1",
+  "source_content_sha256": "ed2908fa6cc56ccd4286dfde2d4f58ff3b1aaec678cdd2abca61594d2d746ccb",
+  "source_bytes": 424863,
+  "fetch_errors_before_success": [],
+  "compact_case_tables": 2,
+  "deidentified_appendix_rows": 10,
+  "hospital_counts": {
+    "Xiangya Third Hospital, Central South University": 4,
+    "Qingdao University Affiliated Hospital": 6
+  },
+  "organ_counts": {
+    "肝臟": 7,
+    "腎臟": 3
+  },
+  "outcome_counts": {
+    "deceased": 6,
+    "alive": 4
+  },
+  "date_range": [
+    "2016-07-31",
+    "2019-03-08"
+  ],
+  "date_range_case_count": 1,
+  "privacy_note": "Names and diagnoses are omitted; patient_token is a one-way case-local hash.",
+  "interpretation_limit": "The judgment establishes illegal brokerage and payments for these recipient operations. It does not identify donors or establish prisoner sourcing."
+}

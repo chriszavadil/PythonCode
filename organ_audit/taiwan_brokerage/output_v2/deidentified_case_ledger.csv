@@ -1,0 +1,11 @@
+﻿case_id,source_appendix,source_row_number,patient_token,hospital,organ,transplant_date_start,transplant_date_end,date_precision,outcome_deceased,outcome_redacted,has_bank_or_payment_records,has_travel_records,has_medical_records,has_chat_or_notes,has_witness_statement
+CHDM-113-JINSU-657-20250724-C01,附表二,1,50e35e59929d,"Xiangya Third Hospital, Central South University",肝臟,2016-07-31,2016-07-31,exact-date,True,deceased,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C02,附表二,2,573baa2826a8,"Xiangya Third Hospital, Central South University",肝臟,2016-11-27,2016-11-27,exact-date,True,deceased,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C03,附表一,3,0c92c0765bbe,Qingdao University Affiliated Hospital,肝臟,2017-03-11,2017-03-11,exact-date,True,deceased,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C04,附表二,3,ed51dda25688,"Xiangya Third Hospital, Central South University",肝臟,2017-05-17,2017-05-28,date-range,False,alive,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C05,附表一,4,b8d83d19f5bc,Qingdao University Affiliated Hospital,肝臟,2017-07-01,2017-07-01,exact-date,True,deceased,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C06,附表一,1,08ecc662ad1b,Qingdao University Affiliated Hospital,肝臟,2017-10-06,2017-10-06,exact-date,True,deceased,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C07,附表二,4,81c4079da5f9,"Xiangya Third Hospital, Central South University",腎臟,2017-12-12,2017-12-12,exact-date,False,alive,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C08,附表一,6,30da84a66292,Qingdao University Affiliated Hospital,腎臟,2018-05-16,2018-05-16,exact-date,False,alive,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C09,附表一,5,db8a40bed7b1,Qingdao University Affiliated Hospital,腎臟,2019-03-04,2019-03-04,exact-date,False,alive,True,True,True,True,True
+CHDM-113-JINSU-657-20250724-C10,附表一,2,35f0ea5022d8,Qingdao University Affiliated Hospital,肝臟,2019-03-08,2019-03-08,exact-date,True,deceased,True,True,True,True,True
