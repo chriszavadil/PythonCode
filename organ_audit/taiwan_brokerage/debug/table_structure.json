@@ -1,0 +1,348 @@
+{
+  "url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=CHDM,113,%E9%87%91%E8%A8%B4,657,20250724,1",
+  "html_sha256": "afb4bac57ab89ef3de4d52f7353c8863ee19b1e236cefb8498c7df5a2c775926",
+  "fetch_errors_before_success": [],
+  "html_table_count": 6,
+  "tables": [
+    {
+      "table_index": 1,
+      "nearest_appendix_label": "",
+      "contains_patient_header": true,
+      "contains_transplant_time_header": true,
+      "text_length": 24164,
+      "frame_shapes": [
+        [
+          83,
+          10
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          54,
+          4
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ],
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ],
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ]
+      ],
+      "detected_dates": [
+        "102年7月29日",
+        "105年11月27日",
+        "105年12月6日",
+        "105年7月29日",
+        "105年7月31日",
+        "106年10月2日",
+        "106年10月6日",
+        "106年11月16日",
+        "106年11月28日",
+        "106年12月12日",
+        "106年3月11日",
+        "106年3月8日",
+        "106年5月17日至同年5月28日間某日",
+        "106年6月12日",
+        "106年7月1日",
+        "107年4月4日",
+        "107年5月16日",
+        "107年5月24日",
+        "108年3月4日",
+        "108年3月7日",
+        "108年3月8日",
+        "108年4月18日",
+        "111年9月25日",
+        "112年7月4日",
+        "112年8月10日",
+        "113年11月12日",
+        "113年11月5日",
+        "113年3月14日",
+        "113年3月6日",
+        "113年5月10日",
+        "113年5月13日",
+        "113年5月17日",
+        "113年5月21日",
+        "113年5月2日",
+        "113年5月6日",
+        "113年6月14日",
+        "113年6月4日",
+        "113年7月18日",
+        "113年8月23日",
+        "113年8月30日",
+        "113年9月3日",
+        "113年9月5日",
+        "114年6月5日",
+        "74年3月2日"
+      ],
+      "detected_organs": [
+        "肝臟移植",
+        "腎臟移植"
+      ],
+      "appendix_labels_inside": [
+        "附表一",
+        "附表三",
+        "附表二",
+        "附表四"
+      ]
+    },
+    {
+      "table_index": 2,
+      "nearest_appendix_label": "附表一",
+      "contains_patient_header": true,
+      "contains_transplant_time_header": true,
+      "text_length": 8109,
+      "frame_shapes": [
+        [
+          7,
+          10
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      ],
+      "detected_dates": [
+        "106年10月2日",
+        "106年10月6日",
+        "106年11月16日",
+        "106年11月28日",
+        "106年3月11日",
+        "106年3月8日",
+        "106年6月12日",
+        "106年7月1日",
+        "107年4月4日",
+        "107年5月16日",
+        "107年5月24日",
+        "108年3月4日",
+        "108年3月7日",
+        "108年3月8日",
+        "111年9月25日",
+        "112年7月4日",
+        "112年8月10日",
+        "113年11月12日",
+        "113年11月5日",
+        "113年3月14日",
+        "113年3月6日",
+        "113年5月13日",
+        "113年5月17日",
+        "113年5月21日",
+        "113年5月2日",
+        "113年5月6日",
+        "113年6月4日",
+        "113年7月18日",
+        "113年8月23日",
+        "113年9月5日",
+        "114年6月5日"
+      ],
+      "detected_organs": [
+        "肝臟移植",
+        "腎臟移植"
+      ],
+      "appendix_labels_inside": [
+        "附表三"
+      ]
+    },
+    {
+      "table_index": 3,
+      "nearest_appendix_label": "附表二",
+      "contains_patient_header": true,
+      "contains_transplant_time_header": true,
+      "text_length": 3303,
+      "frame_shapes": [
+        [
+          5,
+          10
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9"
+        ]
+      ],
+      "detected_dates": [
+        "105年11月27日",
+        "105年12月6日",
+        "105年7月29日",
+        "105年7月31日",
+        "106年12月12日",
+        "106年5月17日至同年5月28日間某日",
+        "108年4月18日",
+        "113年11月12日",
+        "113年11月5日",
+        "113年5月10日",
+        "113年5月13日",
+        "113年5月17日",
+        "113年5月21日",
+        "113年6月14日",
+        "113年6月4日",
+        "113年8月23日",
+        "113年8月30日",
+        "113年9月3日",
+        "114年6月5日"
+      ],
+      "detected_organs": [
+        "肝臟移植",
+        "腎臟移植"
+      ],
+      "appendix_labels_inside": []
+    },
+    {
+      "table_index": 4,
+      "nearest_appendix_label": "附表三",
+      "contains_patient_header": false,
+      "contains_transplant_time_header": false,
+      "text_length": 230,
+      "frame_shapes": [
+        [
+          8,
+          4
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ]
+      ],
+      "detected_dates": [],
+      "detected_organs": [],
+      "appendix_labels_inside": []
+    },
+    {
+      "table_index": 5,
+      "nearest_appendix_label": "附表四",
+      "contains_patient_header": false,
+      "contains_transplant_time_header": false,
+      "text_length": 542,
+      "frame_shapes": [
+        [
+          8,
+          4
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ]
+      ],
+      "detected_dates": [],
+      "detected_organs": [],
+      "appendix_labels_inside": [
+        "附表一",
+        "附表二"
+      ]
+    },
+    {
+      "table_index": 6,
+      "nearest_appendix_label": "附表二",
+      "contains_patient_header": false,
+      "contains_transplant_time_header": false,
+      "text_length": 1192,
+      "frame_shapes": [
+        [
+          54,
+          4
+        ]
+      ],
+      "columns": [
+        [
+          "",
+          "1",
+          "2",
+          "3"
+        ]
+      ],
+      "detected_dates": [],
+      "detected_organs": [],
+      "appendix_labels_inside": []
+    }
+  ]
+}
