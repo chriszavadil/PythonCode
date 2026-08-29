@@ -6,7 +6,6 @@ on:
     branches: [master]
     paths:
       - "organ_audit/taiwan_court_corpus/search_judgments.py"
-      - "organ_audit/taiwan_court_corpus/refine_by_proximity.py"
       - ".github/workflows/search_taiwan_transplant_judgments.yml"
 
 permissions:
@@ -14,7 +13,7 @@ permissions:
 
 concurrency:
   group: taiwan-transplant-judgment-scan
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   scan:
@@ -32,11 +31,8 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4
 
-      - name: Search and score public judgments
+      - name: Search and strictly score public judgments
         run: python organ_audit/taiwan_court_corpus/search_judgments.py
-
-      - name: Refine candidates by local co-occurrence
-        run: python organ_audit/taiwan_court_corpus/refine_by_proximity.py
 
       - name: Commit reproducible outputs
         run: |
@@ -46,6 +42,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No output changes"
           else
-            git commit -m "Add proximity-refined Taiwan judgment leads"
+            git commit -m "Add strict Taiwan transplant-brokerage judgment scan results"
             git push
           fi
