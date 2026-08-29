@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - "organ_audit/taiwan_brokerage/extract_judgment_ledger.py"
+      - "organ_audit/taiwan_brokerage/extract_judgment_ledger_v2.py"
       - ".github/workflows/extract_taiwan_brokerage_ledger.yml"
   workflow_dispatch:
 
@@ -24,26 +24,16 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: python -m pip install --disable-pip-version-check requests beautifulsoup4 pandas lxml
-      - name: Patch pandas HTML input compatibility
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          path = Path("organ_audit/taiwan_brokerage/extract_judgment_ledger.py")
-          text = path.read_text(encoding="utf-8")
-          text = text.replace("from pathlib import Path\n", "from pathlib import Path\nfrom io import StringIO\n")
-          text = text.replace('pd.read_html(html, flavor="lxml")', 'pd.read_html(StringIO(html), flavor="lxml")')
-          path.write_text(text, encoding="utf-8")
-          PY
-      - name: Fetch judgment and build deidentified ledger
-        run: python organ_audit/taiwan_brokerage/extract_judgment_ledger.py
+      - name: Fetch judgment and build validated deidentified ledger
+        run: python organ_audit/taiwan_brokerage/extract_judgment_ledger_v2.py
       - name: Commit reproducible outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add organ_audit/taiwan_brokerage/output
+          git add organ_audit/taiwan_brokerage/output_v2
           if git diff --cached --quiet; then
             echo "No output changes"
           else
-            git commit -m "Add deidentified Taiwan brokerage judgment ledger"
+            git commit -m "Add validated Taiwan brokerage judgment ledger"
             git push
           fi
