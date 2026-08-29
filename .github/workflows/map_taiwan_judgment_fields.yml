@@ -1,0 +1,35 @@
+name: Map Taiwan judgment fields
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/taiwan_brokerage/sanitize_table_fields.py"
+      - ".github/workflows/map_taiwan_judgment_fields.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check requests beautifulsoup4 pandas lxml
+      - run: python organ_audit/taiwan_brokerage/sanitize_table_fields.py
+      - name: Commit privacy-safe field map
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/taiwan_brokerage/field_audit
+          if git diff --cached --quiet; then
+            echo "No output changes"
+          else
+            git commit -m "Add privacy-safe Taiwan judgment field map"
+            git push
+          fi
