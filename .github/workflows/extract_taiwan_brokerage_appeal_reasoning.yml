@@ -11,12 +11,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: extract-taiwan-brokerage-appeal-reasoning
+  cancel-in-progress: false
+
 jobs:
   extract:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -29,7 +35,14 @@ jobs:
           git add organ_audit/taiwan_court_corpus/focused_appeal
           if git diff --cached --quiet; then
             echo "No output changes"
-          else
-            git commit -m "Add sentence-level reasoning from 2026 brokerage appeal"
-            git push
+            exit 0
           fi
+          git commit -m "Add sentence-level reasoning from 2026 brokerage appeal"
+          for attempt in 1 2 3; do
+            git pull --rebase origin master
+            if git push origin HEAD:master; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1
