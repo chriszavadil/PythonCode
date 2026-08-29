@@ -1,0 +1,1365 @@
+{
+  "source_url": "https://judgment.judicial.gov.tw/FJUD/data.aspx?ty=JD&id=CHDM,113,%E9%87%91%E8%A8%B4,657,20250724,1",
+  "source_sha256": "ccb1e75a875159bba24ea4427cefb5d00d6684366930572fc2e70ef9fdd7f1f4",
+  "privacy": "Names, diagnoses, addresses, phone numbers, and unrestricted cell text are omitted.",
+  "tables": [
+    {
+      "appendix": "附表一",
+      "shape": [
+        7,
+        10
+      ],
+      "column_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "rows": [
+        {
+          "row_index": 0,
+          "cells": [
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 8,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 12,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "肝臟",
+                "腎臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 9,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 22,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            }
+          ]
+        },
+        {
+          "row_index": 1,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 7,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 15,
+              "dates": [
+                "106年10月6日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 10,
+              "dates": [
+                "111年9月25日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 39,
+              "dates": [
+                "106年10月2日"
+              ],
+              "money": [
+                "100萬元",
+                "500萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "20萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 1475,
+              "dates": [
+                "113年5月13日",
+                "113年5月13日",
+                "113年5月17日",
+                "113年5月21日",
+                "113年6月4日",
+                "113年6月4日",
+                "113年11月5日",
+                "113年11月12日",
+                "113年7月18日",
+                "113年3月6日",
+                "113年3月14日",
+                "112年7月4日",
+                "112年8月10日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "匯款",
+                "帳戶",
+                "交易明細",
+                "入出境",
+                "病歷",
+                "抗排斥藥",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 2,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 9,
+              "dates": [
+                "108年3月8日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 119,
+              "dates": [
+                "106年11月16日",
+                "106年11月16日",
+                "106年11月28日"
+              ],
+              "money": [
+                "50萬元",
+                "150萬元",
+                "50萬元",
+                "150萬元",
+                "50萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "20萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 1024,
+              "dates": [
+                "113年8月23日",
+                "113年8月23日",
+                "113年9月5日",
+                "113年7月18日",
+                "113年3月6日",
+                "113年3月14日",
+                "112年7月4日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "匯款",
+                "帳戶",
+                "交易明細",
+                "入出境",
+                "出入境",
+                "抗排斥藥",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 3,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 15,
+              "dates": [
+                "106年3月11日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 9,
+              "dates": [
+                "107年4月4日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 66,
+              "dates": [
+                "106年3月8日"
+              ],
+              "money": [
+                "86萬5000元",
+                "93萬元",
+                "372萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "20萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 1487,
+              "dates": [
+                "113年5月2日",
+                "113年5月2日",
+                "113年5月6日",
+                "113年5月13日",
+                "113年5月13日",
+                "113年5月17日",
+                "113年5月21日",
+                "113年6月4日",
+                "113年6月4日",
+                "113年11月5日",
+                "113年11月12日",
+                "113年7月18日",
+                "113年3月6日",
+                "113年3月14日",
+                "112年7月4日",
+                "112年8月10日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "匯款",
+                "帳戶",
+                "交易明細",
+                "入出境",
+                "出入境",
+                "病歷",
+                "抗排斥藥",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 4,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 14,
+              "dates": [
+                "106年7月1日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 10,
+              "dates": [
+                "107年5月24日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 158,
+              "dates": [
+                "106年6月12日",
+                "106年6月12日",
+                "106年6月12日",
+                "106年6月12日"
+              ],
+              "money": [
+                "45萬元",
+                "90萬元",
+                "90萬元",
+                "45萬元",
+                "135萬元",
+                "45萬元",
+                "90萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "30萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 1392,
+              "dates": [
+                "113年5月13日",
+                "113年5月13日",
+                "113年5月17日",
+                "113年5月21日",
+                "113年6月4日",
+                "113年6月4日",
+                "113年11月5日",
+                "113年11月12日",
+                "113年8月23日",
+                "113年8月23日",
+                "113年7月18日",
+                "113年3月6日",
+                "113年3月14日",
+                "112年7月4日",
+                "112年8月10日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "匯款",
+                "帳戶",
+                "交易明細",
+                "入出境",
+                "抗排斥藥",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 5,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 10,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": []
+            },
+            {
+              "length": 13,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 14,
+              "dates": [
+                "108年3月4日"
+              ],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "存活"
+              ]
+            },
+            {
+              "length": 64,
+              "dates": [
+                "108年3月7日",
+                "108年3月7日"
+              ],
+              "money": [
+                "260萬元",
+                "40萬元",
+                "120萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "現金",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "30萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 662,
+              "dates": [
+                "113年8月23日",
+                "113年8月23日",
+                "114年6月5日",
+                "113年3月6日",
+                "113年3月14日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "入出境",
+                "病歷",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 6,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "存活"
+              ]
+            },
+            {
+              "length": 37,
+              "dates": [
+                "107年5月16日"
+              ],
+              "money": [
+                "350萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "20萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 884,
+              "dates": [
+                "113年8月23日",
+                "114年6月5日",
+                "113年3月6日",
+                "113年3月14日",
+                "112年7月4日",
+                "112年8月10日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "帳戶",
+                "交易明細",
+                "入出境",
+                "病歷",
+                "對話紀錄",
+                "筆記",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "appendix": "附表二",
+      "shape": [
+        5,
+        10
+      ],
+      "column_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "rows": [
+        {
+          "row_index": 0,
+          "cells": [
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 8,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 12,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "肝臟",
+                "腎臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 22,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 4,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            }
+          ]
+        },
+        {
+          "row_index": 1,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 15,
+              "dates": [
+                "105年7月31日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 10,
+              "dates": [
+                "108年4月18日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 24,
+              "dates": [
+                "105年7月29日"
+              ],
+              "money": [
+                "465萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "現金"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "50萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 899,
+              "dates": [
+                "113年5月13日",
+                "113年5月13日",
+                "113年5月17日",
+                "113年5月21日",
+                "113年6月4日",
+                "113年6月4日",
+                "113年11月5日",
+                "113年11月12日",
+                "113年8月23日",
+                "113年8月23日",
+                "113年9月3日",
+                "114年6月5日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "匯款",
+                "入出境",
+                "病歷",
+                "抗排斥藥",
+                "對話紀錄",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 2,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 6,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 16,
+              "dates": [
+                "105年11月27日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 10,
+              "dates": [
+                "105年12月6日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "歿"
+              ]
+            },
+            {
+              "length": 41,
+              "dates": [],
+              "money": [
+                "萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "匯款",
+                "帳戶"
+              ]
+            },
+            {
+              "length": 67,
+              "dates": [],
+              "money": [
+                "746萬元",
+                "人民幣100萬元",
+                "新臺幣462萬元",
+                "284萬元",
+                "200萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 801,
+              "dates": [
+                "113年5月13日",
+                "113年5月13日",
+                "113年5月17日",
+                "113年5月21日",
+                "113年6月4日",
+                "113年6月4日",
+                "113年11月5日",
+                "113年11月12日",
+                "113年8月30日",
+                "113年8月23日",
+                "113年8月23日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "入出境",
+                "病歷",
+                "對話紀錄",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 3,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 26,
+              "dates": [
+                "106年5月17日至同年5月28日間某日"
+              ],
+              "money": [],
+              "organs": [
+                "肝臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "存活"
+              ]
+            },
+            {
+              "length": 19,
+              "dates": [],
+              "money": [
+                "600萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "現金"
+              ]
+            },
+            {
+              "length": 16,
+              "dates": [],
+              "money": [
+                "90萬元",
+                "50萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 566,
+              "dates": [
+                "113年5月10日",
+                "113年6月14日",
+                "114年6月5日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "移植",
+                "入出境",
+                "病歷",
+                "抗排斥藥",
+                "對話紀錄",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        },
+        {
+          "row_index": 4,
+          "cells": [
+            {
+              "length": 1,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 5,
+              "dates": [],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": []
+            },
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 3,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 16,
+              "dates": [
+                "106年12月12日"
+              ],
+              "money": [],
+              "organs": [
+                "腎臟"
+              ],
+              "markers": [
+                "移植"
+              ]
+            },
+            {
+              "length": 2,
+              "dates": [],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "存活"
+              ]
+            },
+            {
+              "length": 87,
+              "dates": [],
+              "money": [
+                "45萬元",
+                "405萬元",
+                "380萬元",
+                "380萬元"
+              ],
+              "organs": [],
+              "markers": [
+                "現金"
+              ]
+            },
+            {
+              "length": 8,
+              "dates": [],
+              "money": [
+                "30萬元"
+              ],
+              "organs": [],
+              "markers": []
+            },
+            {
+              "length": 370,
+              "dates": [
+                "113年8月23日",
+                "113年8月23日"
+              ],
+              "money": [],
+              "organs": [],
+              "markers": [
+                "入出境",
+                "病歷",
+                "對話紀錄",
+                "證人",
+                "供述"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
