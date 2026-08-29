@@ -1,0 +1,13 @@
+{
+  "generated_on": "2026-08-29",
+  "automated_surviving_rows_reviewed": 9,
+  "unique_underlying_event_groups": 4,
+  "known_china_transplant_brokerage_event_groups": 1,
+  "novel_verified_china_transplant_brokerage_event_groups": 0,
+  "novel_verified_post_2015_prisoner_to_recipient_chains": 0,
+  "distinct_non_china_organ_trafficking_threat_event_groups": 1,
+  "false_incidental_or_secondary_rows": 3,
+  "duplicate_or_parallel_rows": 4,
+  "substantive_conclusion": "The court-corpus pass produced no novel verified China transplant-brokerage event beyond the known Changhua prosecution. It separately identified a Southeast Asia scam-compound trafficking matter containing explicit organ-removal discussions, but no completed procurement or prisoner-to-recipient chain.",
+  "evidence_boundary": "Paid brokerage, a threat or discussion of organ removal, or opaque provenance is not proof that a prisoner supplied an organ."
+}
