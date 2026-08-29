@@ -1,0 +1,47 @@
+name: Refine Taiwan transplant judgment leads
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "organ_audit/taiwan_court_corpus/refine_local_context.py"
+      - ".github/workflows/refine_taiwan_transplant_judgments.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refine-taiwan-transplant-judgments
+  cancel-in-progress: false
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+
+      - name: Validate local context around transplant terms
+        run: python organ_audit/taiwan_court_corpus/refine_local_context.py
+
+      - name: Commit refined outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add organ_audit/taiwan_court_corpus/refined
+          if git diff --cached --quiet; then
+            echo "No output changes"
+          else
+            git commit -m "Add locally validated Taiwan transplant judgment leads"
+            git push
+          fi
