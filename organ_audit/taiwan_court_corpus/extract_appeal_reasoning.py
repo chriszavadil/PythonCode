@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""Extract sentence-level reasoning from the 2026 Chen Yao-li sentencing appeal."""
+"""Extract sentence-level issue and decision reasoning from the 2026 Chen Yao-li appeal."""
 
 import json
 import re
@@ -18,10 +18,19 @@ DETAIL = f"{BASE}/FJUD/data.aspx"
 OUT = Path("organ_audit/taiwan_court_corpus/focused_appeal")
 OUT.mkdir(parents=True, exist_ok=True)
 
-TERMS = (
+ISSUE_TERMS = (
     "活摘器官", "活摘", "器官來源不明", "來源不明", "器官提供人",
     "器官捐贈", "捐贈者", "器官買賣", "器官來源", "無證據",
     "伊斯坦堡宣言", "世界衛生組織", "不宜宣告緩刑",
+)
+DECISION_TERMS = (
+    "本院認為", "本院審酌", "本院查", "綜上", "駁回", "上訴無理由",
+    "上訴為無理由", "應予維持", "原判決", "緩刑宣告", "緩刑之宣告",
+    "量刑", "強摘", "無證據", "器官來源", "器官買賣",
+)
+DECISION_START_MARKERS = (
+    "本院之判斷", "本院判斷", "本院認定", "駁回上訴部分",
+    "上訴駁回部分", "本院審酌", "本院查", "本院認為",
 )
 
 
@@ -35,11 +44,52 @@ def redact(value: str) -> str:
     return value
 
 
+def select_blocks(
+    units: list[str],
+    terms: tuple[str, ...],
+    *,
+    start_index: int = 0,
+    context_before: int = 2,
+    context_after: int = 3,
+) -> list[dict[str, object]]:
+    selected: set[int] = set()
+    for index in range(start_index, len(units)):
+        unit = units[index]
+        if any(term in unit for term in terms):
+            selected.update(
+                range(
+                    max(start_index, index - context_before),
+                    min(len(units), index + context_after),
+                )
+            )
+
+    blocks: list[list[int]] = []
+    for index in sorted(selected):
+        if not blocks or index > blocks[-1][-1] + 1:
+            blocks.append([index])
+        else:
+            blocks[-1].append(index)
+
+    passages: list[dict[str, object]] = []
+    for number, block in enumerate(blocks, start=1):
+        raw = " ".join(units[index] for index in block)
+        passages.append(
+            {
+                "passage_number": number,
+                "unit_start": block[0],
+                "unit_end": block[-1],
+                "matched_terms": sorted(term for term in terms if term in raw),
+                "text_redacted": redact(raw),
+            }
+        )
+    return passages
+
+
 def main() -> None:
     session = requests.Session()
     session.headers.update(
         {
-            "User-Agent": "Mozilla/5.0 (compatible; appeal-reasoning-audit/1.0; +https://github.com/chriszavadil/PythonCode)",
+            "User-Agent": "Mozilla/5.0 (compatible; appeal-reasoning-audit/1.1; +https://github.com/chriszavadil/PythonCode)",
             "Accept-Language": "zh-TW,zh;q=0.9,en;q=0.5",
         }
     )
@@ -57,40 +107,41 @@ def main() -> None:
     text = re.sub(r"\s+", " ", body.get_text(" ", strip=True))
     time.sleep(0.35)
 
-    # Sentence-like units preserve the court's sequence without publishing the
-    # entire judgment. Include two neighboring units for context.
+    # Sentence-like units preserve sequence without republishing the whole judgment.
     units = [item.strip() for item in re.split(r"(?<=[。；：])", text) if item.strip()]
-    selected: set[int] = set()
-    for index, unit in enumerate(units):
-        if any(term in unit for term in TERMS):
-            selected.update(range(max(0, index - 2), min(len(units), index + 3)))
 
-    blocks: list[list[int]] = []
-    for index in sorted(selected):
-        if not blocks or index > blocks[-1][-1] + 1:
-            blocks.append([index])
-        else:
-            blocks[-1].append(index)
+    issue_passages = select_blocks(units, ISSUE_TERMS)
 
-    passages = []
-    for number, block in enumerate(blocks, start=1):
-        raw = " ".join(units[index] for index in block)
-        passages.append(
-            {
-                "passage_number": number,
-                "matched_terms": sorted(term for term in TERMS if term in raw),
-                "text_redacted": redact(raw),
-            }
-        )
+    marker_indices = [
+        index
+        for index, unit in enumerate(units)
+        if index >= len(units) // 2 and any(marker in unit for marker in DECISION_START_MARKERS)
+    ]
+    decision_start = min(marker_indices) if marker_indices else int(len(units) * 0.65)
+    decision_passages = select_blocks(
+        units,
+        DECISION_TERMS,
+        start_index=decision_start,
+        context_before=3,
+        context_after=4,
+    )
+
+    # Include a bounded, redacted tail for independent checking if headings are unusual.
+    tail_start = max(decision_start, len(units) - 80)
+    decision_tail = redact(" ".join(units[tail_start:]))
 
     output = {
         "generated_on": date.today().isoformat(),
         "judgment_id": JUDGMENT_ID,
         "public_url": f"{DETAIL}?ty=JD&id={quote(JUDGMENT_ID, safe=',')}&ot=in",
-        "passages": passages,
+        "unit_count": len(units),
+        "decision_start_unit": decision_start,
+        "issue_passages": issue_passages,
+        "decision_passages": decision_passages,
+        "decision_tail_redacted": decision_tail,
         "interpretation_limit": (
             "This appeal addressed suspended sentences. The underlying facts and convictions were not within the appellate scope. "
-            "Quoted allegations by the prosecutor are not findings unless the court expressly adopts them."
+            "Quoted allegations by the prosecutor or defense are not court findings unless the decision section expressly adopts them."
         ),
     }
     (OUT / "appeal_reasoning.json").write_text(
